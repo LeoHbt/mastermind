@@ -8,22 +8,12 @@ body {
     height: 100vh;
 }
 
-#carre1 {
+.carre {
     height: 125px;
     width: 125px;
 }
 
-#carre2 {
+#resultat {
     height: 125px;
     width: 125px;
-}
-
-#carre3 {
-    height: 125px;
-    width: 125px;
-}
-
-#carre4 {
-    height: 125px;
-    width: 125px;
-}
+} */

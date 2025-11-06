@@ -18,6 +18,10 @@ const PION_JAUNE = document.getElementById('pionJaune')
 const BOUTON_VALIDER = document.getElementById('BoutonValider')
 const BOUTON_ANNULER = document.getElementById('boutonAnnuler')
 
+function ajouterPion(couleur) {
+    
+}
+
 Array.from([PION_ROUGE, PION_BLEU, PION_VERT, PION_JAUNE]).forEach(element => {
     element.addEventListener('click', function() {
         console.log(element)
