@@ -19,6 +19,9 @@ const PION_VERT = document.getElementById("pionVert");
 const PION_JAUNE = document.getElementById("pionJaune");
 const PIONS_TAB = ["pionRouge", "pionBleu", "pionVert", "pionJaune"];
 
+const JEU = document.getElementById("jeu");
+const DIV_RESULTAT = document.getElementById("resultat");
+
 const BOUTON_VALIDER = document.getElementById("boutonValider");
 const BOUTON_ANNULER = document.getElementById("boutonAnnuler");
 
@@ -91,6 +94,36 @@ function comparePions() {
     }
 }
 
+function ajoutLigne() {
+    JEU.insertAdjacentHTML(
+        "beforeend",
+        `<div class="row text-center text-light">
+
+                <span id="ligne1">
+                <div
+                    id="carre1"
+                    class="col-sm-2 col-m-2 p-0 m-3 bg-light position-relative border border-dark border-4 rounded carre"
+                ></div>
+                <div
+                    id="carre2"
+                    class="col-sm-2 col-m-2 p-0 m-3 bg-light position-relative border border-dark border-4 rounded carre"
+                ></div>
+                <div
+                    id="carre3"
+                    class="col-sm-2 col-m-2 p-0 m-3 bg-light position-relative border border-dark border-4 rounded carre"
+                ></div>
+                <div
+                    id="carre4"
+                    class="col-sm-2 col-m-2 p-0 m-3 bg-light position-relative border border-dark border-4 rounded carre"
+                ></div>
+                <div
+                    id="resultat"
+                    class="col-sm-2 col-m-2 p-0 m-3 bg-dark position-relative border border-light border-4 rounded d-flex flex-wrap"
+                >
+            </div>`
+    );
+}
+
 // addEventListener sur chaques pions de couleurs
 Array.from([PION_ROUGE, PION_BLEU, PION_VERT, PION_JAUNE]).forEach((element) => {
     element.addEventListener("click", function () {
@@ -113,4 +146,6 @@ BOUTON_VALIDER.addEventListener("click", function () {
     }
 
     comparePions();
+
+    ajoutLigne();
 });

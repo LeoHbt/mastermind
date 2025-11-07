@@ -29,7 +29,7 @@
         </header>
 
         <main class="container-fluid bg-secondary">
-            <div class="row text-center text-light">
+            <div id="jeu" class="row text-center text-light">
                 <h3 class="col-12 pt-4 mb-0">L'ordinateur à choisi une combinaison</h3>
                 <p class="col-12 fs-5 fw-light">essayez de la retrouver !</p>
 
@@ -53,30 +53,26 @@
                     id="resultat"
                     class="col-sm-2 col-m-2 p-0 m-3 bg-dark position-relative border border-light border-4 rounded d-flex flex-wrap"
                 >
-                    <img class="col-6 p-2" src="img/pions/white.png" alt="" />
-                    <img class="col-6 p-2" src="img/pions/white.png" alt="" />
-                    <img class="col-6 p-2" src="img/pions/pionRouge.png" alt="" />
+                    <img class="col-6 p-2" src="img/pions/black.png" alt="" />
+                    <img class="col-6 p-2" src="img/pions/black.png" alt="" />
+                    <img class="col-6 p-2" src="img/pions/black.png" alt="" />
                     <img class="col-6 p-2" src="img/pions/black.png" alt="" />
                 </div>
-
-                <div class="row d-flex justify-content-center">
-                    <img id="pionRouge" class="col-1" src="img/pions/pionRouge.png" alt="" />
-                    <img id="pionBleu" class="col-1" src="img/pions/pionBleu.png" alt="" />
-                    <img id="pionVert" class="col-1" src="img/pions/pionVert.png" alt="" />
-                    <img id="pionJaune" class="col-1" src="img/pions/pionJaune.png" alt="" />
+            </div>
+            <div class="row d-flex justify-content-center">
+                <img id="pionRouge" class="col-1" src="img/pions/pionRouge.png" alt="" />
+                <img id="pionBleu" class="col-1" src="img/pions/pionBleu.png" alt="" />
+                <img id="pionVert" class="col-1" src="img/pions/pionVert.png" alt="" />
+                <img id="pionJaune" class="col-1" src="img/pions/pionJaune.png" alt="" />
+            </div>
+            <div class="row d-flex justify-content-center pt-4">
+                <div class="col-2 d-flex align-items-center">
+                    <button id="boutonValider" class="btn btn-success btn-lg w-100 border border-lg border-dark">
+                        Valider
+                    </button>
                 </div>
-
-                <div class="row d-flex justify-content-center pt-4">
-                    <div class="col-2 d-flex align-items-center">
-                        <button id="boutonValider" class="btn btn-success btn-lg w-100 border border-lg border-dark">
-                            Valider
-                        </button>
-                    </div>
-                    <div class="col-2 d-flex align-items-center">
-                        <button id="boutonAnnuler" class="btn btn-danger btn-lg w-100 border border-dark">
-                            Annuler
-                        </button>
-                    </div>
+                <div class="col-2 d-flex align-items-center">
+                    <button id="boutonAnnuler" class="btn btn-danger btn-lg w-100 border border-dark">Annuler</button>
                 </div>
             </div>
         </main>
