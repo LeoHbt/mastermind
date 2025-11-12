@@ -1,5 +1,5 @@
 // Variables de jeu
-let essaisRestants = 10;
+let essaisRestants = 2;
 let nombreLignes = 1;
 
 let pionsUtilisateur = [];
@@ -18,6 +18,8 @@ let CARRE_TAB = [CARRE1, CARRE2, CARRE3, CARRE4];
 let DIV_RESULTAT = document.getElementById("resultat-1");
 
 // Constantes de jeu
+const SELECTEUR_PIONS = document.getElementById("selecteurPions");
+
 const PION_ROUGE = document.getElementById("pionRouge");
 const PION_BLEU = document.getElementById("pionBleu");
 const PION_VERT = document.getElementById("pionVert");
@@ -101,11 +103,11 @@ function comparePions() {
 function ajoutLigne(nombreLigne) {
     JEU.insertAdjacentHTML(
         "beforeend",
-        `<div class="row text-center text-light">
+        `<div class="row mx-auto text-center text-light">
 
                 <div
                     id="carre1-${nombreLigne}"
-                    class="col-sm-2 col-m-2 p-0 m-3 bg-light position-relative border border-dark border-4 rounded carre"
+                    class="col-sm-2 col-m-2 ms-auto p-0 m-3 bg-light position-relative border border-dark border-4 rounded carre"
                 ></div>
                 <div
                     id="carre2-${nombreLigne}"
@@ -121,7 +123,7 @@ function ajoutLigne(nombreLigne) {
                 ></div>
                 <div
                     id="resultat-${nombreLigne}"
-                    class="col-sm-2 col-m-2 p-0 m-3 bg-dark position-relative border border-light border-4 rounded d-flex flex-wrap resultat"
+                    class="col-sm-2 col-m-2 me-auto p-0 m-3 bg-dark position-relative border border-light border-4 rounded d-flex flex-wrap resultat"
                 >
             </div>`
     );
@@ -147,7 +149,7 @@ Array.from([PION_ROUGE, PION_BLEU, PION_VERT, PION_JAUNE]).forEach((element) => 
     });
 });
 
-BOUTON_ANNULER.addEventListener("click", function () {
+BOUTON_ANNULER.addEventListener("click", function supprimer() {
     for (let i = 0; i < CARRE_TAB.length; i++) {
         CARRE_TAB[i].innerHTML = "";
     }
@@ -159,11 +161,36 @@ BOUTON_VALIDER.addEventListener("click", function () {
         return;
     }
 
+    let gameWon = false;
     nombreLignes++;
 
     comparePions();
-
     afficherResultat();
+
+    essaisRestants--;
+
+    if (pionsBienPlace == 4) {
+        gameWon = true;
+    }
+    if (gameWon == true) {
+        JEU.insertAdjacentHTML(
+            "beforeend",
+            '<div class="row"><p class="fs-1 m-0 text-success rounded border border-4 border-dark mx-auto col-auto bg-light">GAGNÉ !</p></div>'
+        );
+        BOUTON_ANNULER.removeEventListener("click", supprimer);
+        BOUTON_VALIDER.disabled = true;
+        BOUTON_ANNULER.disabled = true;
+        return;
+    }
+    if (essaisRestants == 0) {
+        JEU.insertAdjacentHTML(
+            "beforeend",
+            '<div class="row mx-auto"><p class="fs-1 m-0 mb-2 text-danger rounded border border-4 border-dark ms-auto me-auto col-auto bg-light">PERDU !</p></div>'
+        );
+        BOUTON_VALIDER.disabled = true;
+        BOUTON_ANNULER.disabled = true;
+        return;
+    }
 
     ajoutLigne(nombreLignes);
 
