@@ -1,18 +1,23 @@
 // Variables de jeu
 let essaisRestants = 10;
+let nombreLignes = 1;
+
 let pionsUtilisateur = [];
 let pionsOrdinateur = [];
+
 let pionsBienPlace = 0;
 let pionsMalPlace = 0;
 let pionsIncorrect = 0;
 
-// Constantes de jeu
-const CARRE1 = document.getElementById("carre1");
-const CARRE2 = document.getElementById("carre2");
-const CARRE3 = document.getElementById("carre3");
-const CARRE4 = document.getElementById("carre4");
-const CARRE_TAB = [CARRE1, CARRE2, CARRE3, CARRE4];
+let CARRE1 = document.getElementById("carre1-1");
+let CARRE2 = document.getElementById("carre2-1");
+let CARRE3 = document.getElementById("carre3-1");
+let CARRE4 = document.getElementById("carre4-1");
+let CARRE_TAB = [CARRE1, CARRE2, CARRE3, CARRE4];
 
+let DIV_RESULTAT = document.getElementById("resultat-1");
+
+// Constantes de jeu
 const PION_ROUGE = document.getElementById("pionRouge");
 const PION_BLEU = document.getElementById("pionBleu");
 const PION_VERT = document.getElementById("pionVert");
@@ -20,7 +25,6 @@ const PION_JAUNE = document.getElementById("pionJaune");
 const PIONS_TAB = ["pionRouge", "pionBleu", "pionVert", "pionJaune"];
 
 const JEU = document.getElementById("jeu");
-const DIV_RESULTAT = document.getElementById("resultat");
 
 const BOUTON_VALIDER = document.getElementById("boutonValider");
 const BOUTON_ANNULER = document.getElementById("boutonAnnuler");
@@ -94,34 +98,45 @@ function comparePions() {
     }
 }
 
-function ajoutLigne() {
+function ajoutLigne(nombreLigne) {
     JEU.insertAdjacentHTML(
         "beforeend",
         `<div class="row text-center text-light">
 
-                <span id="ligne1">
                 <div
-                    id="carre1"
+                    id="carre1-${nombreLigne}"
                     class="col-sm-2 col-m-2 p-0 m-3 bg-light position-relative border border-dark border-4 rounded carre"
                 ></div>
                 <div
-                    id="carre2"
+                    id="carre2-${nombreLigne}"
                     class="col-sm-2 col-m-2 p-0 m-3 bg-light position-relative border border-dark border-4 rounded carre"
                 ></div>
                 <div
-                    id="carre3"
+                    id="carre3-${nombreLigne}"
                     class="col-sm-2 col-m-2 p-0 m-3 bg-light position-relative border border-dark border-4 rounded carre"
                 ></div>
                 <div
-                    id="carre4"
+                    id="carre4-${nombreLigne}"
                     class="col-sm-2 col-m-2 p-0 m-3 bg-light position-relative border border-dark border-4 rounded carre"
                 ></div>
                 <div
-                    id="resultat"
-                    class="col-sm-2 col-m-2 p-0 m-3 bg-dark position-relative border border-light border-4 rounded d-flex flex-wrap"
+                    id="resultat-${nombreLigne}"
+                    class="col-sm-2 col-m-2 p-0 m-3 bg-dark position-relative border border-light border-4 rounded d-flex flex-wrap resultat"
                 >
             </div>`
     );
+}
+
+function afficherResultat() {
+    for (let i = 0; i < pionsBienPlace; i++) {
+        DIV_RESULTAT.insertAdjacentHTML("beforeend", '<img class="col-6 p-2" src="img/pions/white.png" alt="" />');
+    }
+    for (let i = 0; i < pionsMalPlace; i++) {
+        DIV_RESULTAT.insertAdjacentHTML("beforeend", '<img class="col-6 p-2" src="img/pions/pionRouge.png" alt="" />');
+    }
+    for (let i = 0; i < pionsIncorrect; i++) {
+        DIV_RESULTAT.insertAdjacentHTML("beforeend", '<img class="col-6 p-2" src="img/pions/black.png" alt="" />');
+    }
 }
 
 // addEventListener sur chaques pions de couleurs
@@ -141,11 +156,26 @@ BOUTON_ANNULER.addEventListener("click", function () {
 BOUTON_VALIDER.addEventListener("click", function () {
     // stop la fonction si l'utilisateur n'a pas mis 4 pions
     if (CARRE4.innerHTML == "") {
-        console.log("non");
         return;
     }
 
+    nombreLignes++;
+
     comparePions();
 
-    ajoutLigne();
+    afficherResultat();
+
+    ajoutLigne(nombreLignes);
+
+    CARRE1 = document.getElementById(`carre1-${nombreLignes}`);
+    CARRE2 = document.getElementById(`carre2-${nombreLignes}`);
+    CARRE3 = document.getElementById(`carre3-${nombreLignes}`);
+    CARRE4 = document.getElementById(`carre4-${nombreLignes}`);
+    CARRE_TAB = [CARRE1, CARRE2, CARRE3, CARRE4];
+
+    DIV_RESULTAT = document.getElementById(`resultat-${nombreLignes}`);
+
+    pionsBienPlace = 0;
+    pionsMalPlace = 0;
+    pionsIncorrect = 0;
 });
