@@ -1,5 +1,5 @@
 // Variables de jeu
-let essaisRestants = 2;
+let essaisRestants = 5;
 let nombreLignes = 1;
 
 let pionsUtilisateur = [];
@@ -75,16 +75,10 @@ function comparePions() {
             pionActuel = "pionJaune";
         }
 
-        console.log(pionActuel);
-
         pionsOrdinateur.some(() => {
             if (pionActuel == pionsOrdinateur[i]) {
                 pionsBienPlace++;
-                console.log(pionsOrdinateurTemp);
-                return true;
-            } else if (pionsOrdinateurTemp.includes(pionActuel.toString())) {
-                pionsMalPlace++;
-                pionsOrdinateurTemp.splice(1, pionsOrdinateurTemp.indexOf(pionActuel.toString()));
+                pionsOrdinateurTemp.splice(i, 1, "test");
                 console.log(pionsOrdinateurTemp);
                 return true;
             } else {
@@ -93,10 +87,15 @@ function comparePions() {
                 return true;
             }
         });
-
-        console.log(pionsBienPlace);
-        console.log(pionsMalPlace);
-        console.log(pionsIncorrect);
+    }
+    for (let i = 0; i < 4; i++) {
+        pionsOrdinateur.some(() => {
+            if (pionsOrdinateurTemp.indexOf(pionActuel.toString()) != -1) {
+                pionsOrdinateurTemp.splice(pionsOrdinateurTemp.indexOf(pionActuel.toString()), 1, "test");
+                pionsMalPlace++;
+                pionsIncorrect--;
+            }
+        });
     }
 }
 
@@ -175,9 +174,8 @@ BOUTON_VALIDER.addEventListener("click", function () {
     if (gameWon == true) {
         JEU.insertAdjacentHTML(
             "beforeend",
-            '<div class="row"><p class="fs-1 m-0 text-success rounded border border-4 border-dark mx-auto col-auto bg-light">GAGNÉ !</p></div>'
+            '<div class="row"><p class="fs-1 m-0 my-3 text-success rounded border border-4 border-dark mx-auto col-auto bg-light">GAGNÉ !</p></div>'
         );
-        BOUTON_ANNULER.removeEventListener("click", supprimer);
         BOUTON_VALIDER.disabled = true;
         BOUTON_ANNULER.disabled = true;
         return;
@@ -185,7 +183,7 @@ BOUTON_VALIDER.addEventListener("click", function () {
     if (essaisRestants == 0) {
         JEU.insertAdjacentHTML(
             "beforeend",
-            '<div class="row mx-auto"><p class="fs-1 m-0 mb-2 text-danger rounded border border-4 border-dark ms-auto me-auto col-auto bg-light">PERDU !</p></div>'
+            '<div class="row mx-auto"><p class="fs-1 m-0 my-3 text-danger rounded border border-4 border-dark ms-auto me-auto col-auto bg-light">PERDU !</p></div>'
         );
         BOUTON_VALIDER.disabled = true;
         BOUTON_ANNULER.disabled = true;
